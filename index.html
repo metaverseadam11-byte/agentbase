@@ -195,6 +195,39 @@
             border-radius: 18px;
         }
 
+        .code-section {
+            background: #f5f5f7;
+            padding: 80px 20px;
+        }
+
+        .code-section .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .code-section h2 {
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .code-block {
+            background: #1d1d1f;
+            color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-block .comment { color: #6e7681; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+
         .features {
             max-width: 1200px;
             margin: 80px auto;
@@ -260,77 +293,106 @@
         <div class="container">
             <a href="#" class="logo">AgentBase</a>
             <ul class="links">
+                <li><a href="#how">How it works</a></li>
                 <li><a href="#features">Features</a></li>
-                <li><a href="#platform">Platform</a></li>
+                <li><a href="#api">API</a></li>
                 <li><a href="#docs">Docs</a></li>
-                <li><a href="#pricing">Pricing</a></li>
             </ul>
         </div>
     </nav>
 
     <section class="hero">
         <h1>AgentBase</h1>
-        <p class="subtitle">The infrastructure platform for AI agents.</p>
+        <p class="subtitle">The API platform for AI agents to create and deploy websites.</p>
         <div class="cta-group">
-            <a href="#" class="cta">Get started</a>
-            <a href="#" class="cta secondary">Learn more</a>
+            <a href="#api" class="cta">View API docs</a>
+            <a href="#how" class="cta secondary">See how it works</a>
         </div>
         <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1200&h=675&fit=crop&q=80" alt="AgentBase Platform">
+            <img src="hero-dashboard.png" alt="AgentBase API Platform">
         </div>
     </section>
 
-    <section class="product-section light">
-        <h2>Built for production</h2>
-        <p class="tagline">Deploy AI agents at scale with enterprise-grade reliability.</p>
+    <section class="product-section light" id="how">
+        <h2>One API call. Entire website.</h2>
+        <p class="tagline">AI agents can search domains, register, generate code, deploy, and go live automatically.</p>
         <div class="product-image">
-            <img src="production-ready.png" alt="Production Ready">
+            <img src="production-ready.png" alt="Automated Website Creation">
+        </div>
+    </section>
+
+    <section class="code-section" id="api">
+        <div class="container">
+            <h2>Simple for AI agents</h2>
+            <div class="code-block">
+<span class="comment">// AI agent creates entire website with one call</span>
+<span class="keyword">const</span> result = <span class="keyword">await</span> agentbase.<span class="function">createWebsite</span>({
+  <span class="string">'prompt'</span>: <span class="string">'Create a portfolio site for a designer'</span>,
+  <span class="string">'budget'</span>: <span class="string">'standard'</span>
+});
+
+<span class="comment">// AgentBase handles everything:</span>
+<span class="comment">// • Domain search and registration</span>
+<span class="comment">// • Code generation</span>
+<span class="comment">// • Git repository creation</span>
+<span class="comment">// • Cloudflare Pages deployment</span>
+<span class="comment">// • DNS configuration</span>
+<span class="comment">// • SSL certificate</span>
+
+console.<span class="function">log</span>(result.url); 
+<span class="comment">// → https://portfolio-designer.com (live in minutes)</span>
+            </div>
         </div>
     </section>
 
     <section class="product-section dark">
-        <h2>Lightning fast deployment</h2>
-        <p class="tagline">From code to production in seconds.</p>
+        <h2>Built for AI automation</h2>
+        <p class="tagline">Every step is automated. No dashboards. No manual work.</p>
         <div class="product-image">
-            <img src="fast-deployment.png" alt="Fast Deployment">
+            <img src="fast-deployment.png" alt="Fast Automated Deployment">
         </div>
     </section>
 
     <section class="features" id="features">
         <div class="feature">
+            <div class="feature-icon">🌐</div>
+            <h3>Domain Management</h3>
+            <p>Search, register, and manage domains through OpenSRS API integration.</p>
+        </div>
+        <div class="feature">
             <div class="feature-icon">⚡</div>
-            <h3>Instant Deploy</h3>
-            <p>Push your code and go live in seconds with zero-downtime updates.</p>
+            <h3>Instant Deployment</h3>
+            <p>Deploy to Cloudflare Pages with global CDN and automatic SSL.</p>
         </div>
         <div class="feature">
-            <div class="feature-icon">🔒</div>
-            <h3>Enterprise Security</h3>
-            <p>SOC 2 compliant with end-to-end encryption and isolated execution.</p>
+            <div class="feature-icon">🔧</div>
+            <h3>Git Integration</h3>
+            <p>Every website gets its own repository powered by Gitea.</p>
         </div>
         <div class="feature">
-            <div class="feature-icon">📊</div>
-            <h3>Full Observability</h3>
-            <p>Real-time metrics and distributed tracing for every agent.</p>
+            <div class="feature-icon">🗄️</div>
+            <h3>Asset Storage</h3>
+            <p>Store images and files in Cloudflare R2 with instant delivery.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🏢</div>
+            <h3>Tenant Isolation</h3>
+            <p>Every customer journey operates in its own secure environment.</p>
         </div>
         <div class="feature">
             <div class="feature-icon">♾️</div>
-            <h3>Auto Scaling</h3>
-            <p>Scale from 1 to millions of agents automatically.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">🌍</div>
-            <h3>Global Network</h3>
-            <p>Deploy across 50+ regions worldwide for optimal performance.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">💰</div>
-            <h3>Pay-Per-Use</h3>
-            <p>Only pay for compute time used, down to the millisecond.</p>
+            <h3>Built to Scale</h3>
+            <p>Architecture designed to support millions of websites.</p>
         </div>
     </section>
 
+    <section class="product-section light">
+        <h2>Powered by best-in-class services</h2>
+        <p class="tagline">OpenSRS • Cloudflare • Gitea • Cloudflare Pages • R2</p>
+    </section>
+
     <footer>
-        <p>Copyright © 2026 AgentBase. All rights reserved.</p>
+        <p>Copyright © 2026 AgentBase. Built for AI agents, powered by Joni.</p>
     </footer>
 </body>
 </html>
