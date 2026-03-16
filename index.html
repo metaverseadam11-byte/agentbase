@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgentBase | AI Agent Infrastructure</title>
-    <meta name="description" content="The infrastructure platform built for AI agents. Deploy, scale, and manage autonomous AI workloads.">
-    
-    <!-- Fonts -->
+    <title>AgentBase</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -18,432 +15,334 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --purple: #6366f1;
-            --purple-dark: #4f46e5;
-            --purple-light: #818cf8;
-            --gray-dark: #0f172a;
-            --gray: #1e293b;
-            --gray-light: #334155;
-            --text-light: #94a3b8;
-        }
-
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-            background: #000;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            background: #fff;
+            color: #1d1d1f;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
-        /* Logo */
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .logo svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 10px 30px rgba(99, 102, 241, 0.5));
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 4rem 2rem;
-            position: relative;
-            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), transparent 60%),
-                        radial-gradient(ellipse at bottom, rgba(79, 70, 229, 0.1), transparent 60%);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
+        /* Navigation - Apple style */
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-            background-size: 100px 100px;
-            animation: gridMove 20s linear infinite;
-            opacity: 0.3;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(100px, 100px); }
+        nav .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 44px;
         }
 
-        .hero-content {
+        nav .logo {
+            font-size: 21px;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        nav .links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #1d1d1f;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section - Apple style */
+        .hero {
+            margin-top: 44px;
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px 80px;
             position: relative;
-            z-index: 1;
-            max-width: 1200px;
+            overflow: hidden;
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 12vw, 8rem);
-            font-weight: 900;
-            letter-spacing: -0.04em;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease-out 0.2s both;
-            line-height: 0.95;
+            font-size: 56px;
+            font-weight: 600;
+            letter-spacing: -0.005em;
+            margin-bottom: 8px;
+            line-height: 1.07143;
         }
 
-        .hero .tagline {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            font-weight: 300;
-            max-width: 900px;
-            margin: 0 auto 3rem;
-            color: var(--text-light);
-            letter-spacing: -0.01em;
-            animation: fadeInUp 1s ease-out 0.4s both;
-            line-height: 1.4;
+        .hero .subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.14286;
+            letter-spacing: 0.007em;
+            margin-bottom: 16px;
+            color: #a1a1a6;
         }
 
-        .cta-group {
+        .hero .cta-group {
+            margin-top: 20px;
             display: flex;
-            gap: 1.5rem;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
-        .cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.25rem 3rem;
-            background: var(--purple);
+        .hero .cta {
+            display: inline-block;
+            padding: 12px 22px;
+            background: #0071e3;
             color: #fff;
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1.125rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid var(--purple);
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 400;
+            transition: background 0.3s;
         }
 
-        .cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
-            background: var(--purple-dark);
+        .hero .cta:hover {
+            background: #0077ed;
         }
 
-        .cta.secondary {
+        .hero .cta.secondary {
             background: transparent;
-            border: 2px solid rgba(255,255,255,0.2);
+            border: 1px solid #0071e3;
+            color: #2997ff;
         }
 
-        .cta.secondary:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(255,255,255,0.3);
+        .hero .cta.secondary:hover {
+            background: rgba(0, 113, 227, 0.08);
         }
 
-        /* Sections */
-        .section {
-            padding: clamp(4rem, 12vw, 10rem) 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+        /* Hero Image */
+        .hero-image {
+            margin-top: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .section h2 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
         }
 
-        .section .subtitle {
-            font-size: clamp(1.25rem, 3vw, 1.75rem);
-            color: var(--text-light);
-            font-weight: 300;
-            max-width: 800px;
-            margin-bottom: 4rem;
-            line-height: 1.6;
+        /* Product Sections - Apple style */
+        .product-section {
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .product-section.dark {
+            background: #000;
+            color: #fff;
+        }
+
+        .product-section.light {
+            background: #fbfbfd;
+            color: #1d1d1f;
+        }
+
+        .product-section h2 {
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -0.003em;
+            margin-bottom: 6px;
+            line-height: 1.08349;
+        }
+
+        .product-section .tagline {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.16667;
+            letter-spacing: 0.009em;
+            margin-bottom: 20px;
+            color: #86868b;
+        }
+
+        .product-section.dark .tagline {
+            color: #a1a1a6;
+        }
+
+        .product-image {
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
         }
 
         /* Features Grid */
         .features {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
         }
 
         .feature {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(79, 70, 229, 0.02));
-            padding: 3rem;
-            border-radius: 24px;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .feature:nth-child(1) { animation-delay: 0.1s; }
-        .feature:nth-child(2) { animation-delay: 0.2s; }
-        .feature:nth-child(3) { animation-delay: 0.3s; }
-        .feature:nth-child(4) { animation-delay: 0.4s; }
-        .feature:nth-child(5) { animation-delay: 0.5s; }
-        .feature:nth-child(6) { animation-delay: 0.6s; }
-
-        .feature:hover {
-            transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.3);
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.05));
-            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+            text-align: center;
         }
 
         .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
         }
 
         .feature h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
             letter-spacing: -0.01em;
         }
 
         .feature p {
-            font-size: 1.125rem;
-            line-height: 1.8;
-            color: var(--text-light);
-            font-weight: 400;
+            font-size: 17px;
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+            color: #6e6e73;
         }
 
-        /* Code Block */
-        .code-section {
-            background: var(--gray-dark);
-            padding: clamp(3rem, 8vw, 6rem);
-            border-radius: 32px;
-            margin: 5rem 0;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .code-block {
-            background: #0a0a0a;
-            border-radius: 16px;
-            padding: 2.5rem;
-            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #e5e7eb;
-            overflow-x: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .code-block .keyword { color: #c678dd; font-weight: 600; }
-        .code-block .string { color: #98c379; }
-        .code-block .function { color: #61afef; }
-        .code-block .comment { color: #5c6370; font-style: italic; }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin: 5rem 0;
-            text-align: center;
-        }
-
-        .stat h3 {
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--purple-light), var(--purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat p {
-            font-size: 1.125rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* Footer */
+        /* Footer - Apple style */
         footer {
+            background: #f5f5f7;
+            padding: 40px 20px;
             text-align: center;
-            padding: 4rem 2rem;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-            color: var(--text-light);
+            border-top: 1px solid #d2d2d7;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        footer p {
+            font-size: 12px;
+            color: #86868b;
         }
 
         @media (max-width: 768px) {
-            .features {
-                grid-template-columns: 1fr;
-            }
-            
-            .cta-group {
-                flex-direction: column;
-            }
-            
-            .code-section {
-                padding: 2rem 1.5rem;
-            }
+            .hero h1 { font-size: 40px; }
+            .hero .subtitle { font-size: 21px; }
+            .product-section h2 { font-size: 32px; }
+            .features { grid-template-columns: 1fr; gap: 60px; }
+            nav .links { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <div class="logo">
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Abstract "A" shape -->
-                    <path d="M100 20 L160 120 L140 120 L100 50 L60 120 L40 120 Z" fill="url(#logoGradient)"/>
-                    <rect x="80" y="100" width="40" height="15" rx="2" fill="url(#logoGradient)"/>
-                    <circle cx="100" cy="160" r="20" fill="url(#logoGradient)" opacity="0.6"/>
-                </svg>
-            </div>
-            <h1>AgentBase</h1>
-            <p class="tagline">The infrastructure platform built for AI agents. Deploy, scale, and manage autonomous AI workloads with enterprise-grade reliability.</p>
-            <div class="cta-group">
-                <a href="#features" class="cta">Get Started →</a>
-                <a href="#code" class="cta secondary">View Docs</a>
-            </div>
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">AgentBase</a>
+            <ul class="links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#platform">Platform</a></li>
+                <li><a href="#docs">Docs</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
         </div>
-    </div>
+    </nav>
 
-    <section class="section" id="features">
-        <h2>Why AgentBase?</h2>
-        <p class="subtitle">Everything you need to run production AI agents at scale.</p>
-        
-        <div class="features">
-            <div class="feature">
-                <span class="feature-icon">⚡</span>
-                <h3>Lightning Fast</h3>
-                <p>Deploy AI agents in seconds with zero-downtime updates. Our edge network ensures sub-100ms latency globally.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🔒</span>
-                <h3>Enterprise Security</h3>
-                <p>Isolated execution environments, end-to-end encryption, and SOC 2 compliance built in from day one.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">📊</span>
-                <h3>Full Observability</h3>
-                <p>Real-time metrics, distributed tracing, and AI-powered anomaly detection for every agent.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">♾️</span>
-                <h3>Infinite Scale</h3>
-                <p>Auto-scaling from 1 to 1 million agents. Our infrastructure grows with your needs, automatically.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🌍</span>
-                <h3>Global Network</h3>
-                <p>Deploy across 50+ regions worldwide. Bring compute closer to your users for the best performance.</p>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">💰</span>
-                <h3>Pay-Per-Use</h3>
-                <p>No minimum commitments. Pay only for compute time used, down to the millisecond.</p>
-            </div>
+    <section class="hero">
+        <h1>AgentBase</h1>
+        <p class="subtitle">The infrastructure platform for AI agents.</p>
+        <div class="cta-group">
+            <a href="#" class="cta">Get started</a>
+            <a href="#" class="cta secondary">Learn more</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/1200x675/667eea/ffffff?text=AI+Agent+Dashboard" alt="AgentBase Platform">
         </div>
     </section>
 
-    <section class="section" id="code">
-        <h2>Simple by Design</h2>
-        <p class="subtitle">Deploy your first AI agent in under 60 seconds.</p>
-        
-        <div class="code-section">
-            <div class="code-block"><span class="comment">// Install the SDK</span>
-<span class="keyword">npm install</span> @agentbase/sdk
-
-<span class="comment">// Deploy your agent</span>
-<span class="keyword">import</span> { AgentBase } <span class="keyword">from</span> <span class="string">'@agentbase/sdk'</span>;
-
-<span class="keyword">const</span> agent = <span class="keyword">await</span> AgentBase.<span class="function">deploy</span>({
-  <span class="keyword">name</span>: <span class="string">'customer-support-agent'</span>,
-  <span class="keyword">runtime</span>: <span class="string">'nodejs'</span>,
-  <span class="keyword">model</span>: <span class="string">'gpt-4'</span>,
-  <span class="keyword">code</span>: <span class="string">'./agent.js'</span>,
-  <span class="keyword">resources</span>: {
-    <span class="keyword">cpu</span>: <span class="string">'4 cores'</span>,
-    <span class="keyword">memory</span>: <span class="string">'8GB'</span>,
-    <span class="keyword">gpu</span>: <span class="string">'T4'</span>
-  }
-});
-
-console.<span class="function">log</span>(<span class="string">`✓ Agent deployed: ${agent.url}`</span>);
-<span class="comment">// → https://customer-support-agent.agentbase.io</span></div>
+    <section class="product-section light">
+        <h2>Built for production</h2>
+        <p class="tagline">Deploy AI agents at scale with enterprise-grade reliability.</p>
+        <div class="product-image">
+            <img src="https://via.placeholder.com/1000x600/764ba2/ffffff?text=Production+Ready" alt="Production Ready">
         </div>
     </section>
 
-    <section class="section">
-        <h2>Built for Production</h2>
-        <div class="stats">
-            <div class="stat">
-                <h3>99.99%</h3>
-                <p>Uptime SLA</p>
-            </div>
-            <div class="stat">
-                <h3>&lt;50ms</h3>
-                <p>P99 Latency</p>
-            </div>
-            <div class="stat">
-                <h3>50+</h3>
-                <p>Global Regions</p>
-            </div>
-            <div class="stat">
-                <h3>∞</h3>
-                <p>Auto-Scaling</p>
-            </div>
+    <section class="product-section dark">
+        <h2>Lightning fast deployment</h2>
+        <p class="tagline">From code to production in seconds.</p>
+        <div class="product-image">
+            <img src="https://via.placeholder.com/1000x600/4f46e5/ffffff?text=Fast+Deployment" alt="Fast Deployment">
         </div>
     </section>
 
-    <section class="section" style="text-align: center;">
-        <h2 style="margin-bottom: 2rem;">The Future is Autonomous</h2>
-        <p style="font-size: 1.5rem; font-weight: 300; max-width: 900px; margin: 0 auto 3rem; line-height: 1.7; color: var(--text-light);">
-            AI agents are the next evolution of software. They don't just respond to requests—they take initiative, 
-            learn from experience, and collaborate with other agents to solve complex problems.
-        </p>
-        <p style="font-size: 1.75rem; font-weight: 600; margin-bottom: 3rem;">
-            AgentBase is the platform that makes this future possible.
-        </p>
-        <a href="#features" class="cta">Start Building →</a>
+    <section class="features" id="features">
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Deploy</h3>
+            <p>Push your code and go live in seconds with zero-downtime updates.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <h3>Enterprise Security</h3>
+            <p>SOC 2 compliant with end-to-end encryption and isolated execution.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Full Observability</h3>
+            <p>Real-time metrics and distributed tracing for every agent.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">♾️</div>
+            <h3>Auto Scaling</h3>
+            <p>Scale from 1 to millions of agents automatically.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🌍</div>
+            <h3>Global Network</h3>
+            <p>Deploy across 50+ regions worldwide for optimal performance.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">💰</div>
+            <h3>Pay-Per-Use</h3>
+            <p>Only pay for compute time used, down to the millisecond.</p>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 AgentBase. Built for the age of autonomous AI.</p>
+        <p>Copyright © 2026 AgentBase. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Generate placeholder image with ID
+        document.addEventListener('DOMContentLoaded', () => {
+            // Will be replaced with real images
+        });
+    </script>
 </body>
 </html>
