@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgentBase | AI Agent Infrastructure</title>
     <meta name="description" content="The infrastructure platform built for AI agents. Deploy, scale, and manage autonomous AI workloads.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -12,90 +18,181 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --purple: #6366f1;
+            --purple-dark: #4f46e5;
+            --purple-light: #818cf8;
+            --gray-dark: #0f172a;
+            --gray: #1e293b;
+            --gray-light: #334155;
+            --text-light: #94a3b8;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
             background: #000;
             color: #fff;
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Logo */
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 30px rgba(99, 102, 241, 0.5));
+        }
+
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 2rem;
+            padding: 4rem 2rem;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.15), transparent 60%),
+                        radial-gradient(ellipse at bottom, rgba(79, 70, 229, 0.1), transparent 60%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+            animation: gridMove 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, 100px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-weight: 900;
+            letter-spacing: -0.04em;
             margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-out;
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            line-height: 0.95;
         }
 
-        .hero p {
-            font-size: clamp(1.25rem, 3vw, 2rem);
+        .hero .tagline {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
             font-weight: 300;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 3rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            color: var(--text-light);
+            letter-spacing: -0.01em;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            line-height: 1.4;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
         }
 
         .cta {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
             padding: 1.25rem 3rem;
-            background: #fff;
-            color: #000;
+            background: var(--purple);
+            color: #fff;
             text-decoration: none;
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1.125rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--purple);
         }
 
         .cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(255,255,255,0.3);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.4);
+            background: var(--purple-dark);
         }
 
+        .cta.secondary {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .cta.secondary:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Sections */
         .section {
-            padding: 8rem 2rem;
-            max-width: 1200px;
+            padding: clamp(4rem, 12vw, 10rem) 2rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        .section.dark {
-            background: #000;
-        }
-
-        .section.light {
-            background: #fff;
-            color: #000;
-        }
-
         .section h2 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 3rem;
-            letter-spacing: -0.02em;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
         }
 
+        .section .subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-light);
+            font-weight: 300;
+            max-width: 800px;
+            margin-bottom: 4rem;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
         }
 
         .feature {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(79, 70, 229, 0.02));
+            padding: 3rem;
+            border-radius: 24px;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -107,38 +204,96 @@
         .feature:nth-child(5) { animation-delay: 0.5s; }
         .feature:nth-child(6) { animation-delay: 0.6s; }
 
+        .feature:hover {
+            transform: translateY(-8px);
+            border-color: rgba(99, 102, 241, 0.3);
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(79, 70, 229, 0.05));
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
         .feature h3 {
             font-size: 1.75rem;
             margin-bottom: 1rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
 
         .feature p {
             font-size: 1.125rem;
             line-height: 1.8;
-            opacity: 0.8;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        /* Code Block */
+        .code-section {
+            background: var(--gray-dark);
+            padding: clamp(3rem, 8vw, 6rem);
+            border-radius: 32px;
+            margin: 5rem 0;
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
         .code-block {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 3rem 0;
-            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Courier New', monospace;
-            font-size: 0.95rem;
+            background: #0a0a0a;
+            border-radius: 16px;
+            padding: 2.5rem;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Courier New', monospace;
+            font-size: 1rem;
             line-height: 1.8;
-            color: #a9b7c6;
+            color: #e5e7eb;
             overflow-x: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .code-block .keyword { color: #cc7832; }
-        .code-block .string { color: #6a8759; }
-        .code-block .function { color: #ffc66d; }
+        .code-block .keyword { color: #c678dd; font-weight: 600; }
+        .code-block .string { color: #98c379; }
+        .code-block .function { color: #61afef; }
+        .code-block .comment { color: #5c6370; font-style: italic; }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--purple-light), var(--purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            color: var(--text-light);
+        }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -146,107 +301,145 @@
             }
         }
 
-        footer {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: #000;
-            border-top: 1px solid #222;
-        }
-
-        footer p {
-            opacity: 0.6;
-            font-size: 0.95rem;
-        }
-
         @media (max-width: 768px) {
-            .section {
-                padding: 4rem 1.5rem;
+            .features {
+                grid-template-columns: 1fr;
             }
             
-            .features {
-                gap: 2rem;
+            .cta-group {
+                flex-direction: column;
+            }
+            
+            .code-section {
+                padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="hero">
-        <div>
+        <div class="hero-content">
+            <div class="logo">
+                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#4f46e5;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Abstract "A" shape -->
+                    <path d="M100 20 L160 120 L140 120 L100 50 L60 120 L40 120 Z" fill="url(#logoGradient)"/>
+                    <rect x="80" y="100" width="40" height="15" rx="2" fill="url(#logoGradient)"/>
+                    <circle cx="100" cy="160" r="20" fill="url(#logoGradient)" opacity="0.6"/>
+                </svg>
+            </div>
             <h1>AgentBase</h1>
-            <p>The infrastructure platform built for AI agents. Deploy, scale, and manage autonomous AI workloads.</p>
-            <a href="#learn-more" class="cta">Learn More</a>
+            <p class="tagline">The infrastructure platform built for AI agents. Deploy, scale, and manage autonomous AI workloads with enterprise-grade reliability.</p>
+            <div class="cta-group">
+                <a href="#features" class="cta">Get Started →</a>
+                <a href="#code" class="cta secondary">View Docs</a>
+            </div>
         </div>
     </div>
 
-    <section class="section light" id="learn-more">
-        <h2>What is AgentBase?</h2>
-        <p style="font-size: 1.25rem; max-width: 800px; line-height: 1.8;">
-            AgentBase is the first infrastructure platform designed from the ground up for AI agents. 
-            We provide the compute, storage, networking, and orchestration tools that autonomous AI systems need to thrive.
-        </p>
-    </section>
-
-    <section class="section dark">
+    <section class="section" id="features">
         <h2>Why AgentBase?</h2>
+        <p class="subtitle">Everything you need to run production AI agents at scale.</p>
+        
         <div class="features">
             <div class="feature">
-                <h3>⚡ Built for Speed</h3>
-                <p>Deploy AI agents in seconds, not hours. Our infrastructure is optimized for low-latency, high-throughput workloads.</p>
+                <span class="feature-icon">⚡</span>
+                <h3>Lightning Fast</h3>
+                <p>Deploy AI agents in seconds with zero-downtime updates. Our edge network ensures sub-100ms latency globally.</p>
             </div>
             <div class="feature">
-                <h3>🔒 Secure by Default</h3>
-                <p>Every agent runs in an isolated environment with fine-grained access controls and encrypted communication.</p>
+                <span class="feature-icon">🔒</span>
+                <h3>Enterprise Security</h3>
+                <p>Isolated execution environments, end-to-end encryption, and SOC 2 compliance built in from day one.</p>
             </div>
             <div class="feature">
-                <h3>📊 Observable</h3>
-                <p>Real-time metrics, logs, and traces for every agent. Know exactly what your AI is doing, always.</p>
+                <span class="feature-icon">📊</span>
+                <h3>Full Observability</h3>
+                <p>Real-time metrics, distributed tracing, and AI-powered anomaly detection for every agent.</p>
             </div>
             <div class="feature">
-                <h3>♾️ Scalable</h3>
-                <p>From one agent to millions. Our platform scales elastically to match your workload demands.</p>
+                <span class="feature-icon">♾️</span>
+                <h3>Infinite Scale</h3>
+                <p>Auto-scaling from 1 to 1 million agents. Our infrastructure grows with your needs, automatically.</p>
             </div>
             <div class="feature">
-                <h3>🌍 Global</h3>
-                <p>Deploy agents across multiple regions worldwide. Bring compute closer to your users.</p>
+                <span class="feature-icon">🌍</span>
+                <h3>Global Network</h3>
+                <p>Deploy across 50+ regions worldwide. Bring compute closer to your users for the best performance.</p>
             </div>
             <div class="feature">
-                <h3>💰 Cost-Effective</h3>
-                <p>Pay only for what you use. No idle compute charges, no hidden fees. Simple, transparent pricing.</p>
+                <span class="feature-icon">💰</span>
+                <h3>Pay-Per-Use</h3>
+                <p>No minimum commitments. Pay only for compute time used, down to the millisecond.</p>
             </div>
         </div>
     </section>
 
-    <section class="section light">
-        <h2>How It Works</h2>
-        <div class="code-block">
+    <section class="section" id="code">
+        <h2>Simple by Design</h2>
+        <p class="subtitle">Deploy your first AI agent in under 60 seconds.</p>
+        
+        <div class="code-section">
+            <div class="code-block"><span class="comment">// Install the SDK</span>
+<span class="keyword">npm install</span> @agentbase/sdk
+
+<span class="comment">// Deploy your agent</span>
 <span class="keyword">import</span> { AgentBase } <span class="keyword">from</span> <span class="string">'@agentbase/sdk'</span>;
 
 <span class="keyword">const</span> agent = <span class="keyword">await</span> AgentBase.<span class="function">deploy</span>({
-  <span class="keyword">name</span>: <span class="string">'my-agent'</span>,
+  <span class="keyword">name</span>: <span class="string">'customer-support-agent'</span>,
   <span class="keyword">runtime</span>: <span class="string">'nodejs'</span>,
+  <span class="keyword">model</span>: <span class="string">'gpt-4'</span>,
   <span class="keyword">code</span>: <span class="string">'./agent.js'</span>,
   <span class="keyword">resources</span>: {
-    <span class="keyword">cpu</span>: <span class="string">'2 cores'</span>,
-    <span class="keyword">memory</span>: <span class="string">'4GB'</span>
+    <span class="keyword">cpu</span>: <span class="string">'4 cores'</span>,
+    <span class="keyword">memory</span>: <span class="string">'8GB'</span>,
+    <span class="keyword">gpu</span>: <span class="string">'T4'</span>
   }
 });
 
-console.<span class="function">log</span>(<span class="string">`Agent deployed: ${agent.url}`</span>);
+console.<span class="function">log</span>(<span class="string">`✓ Agent deployed: ${agent.url}`</span>);
+<span class="comment">// → https://customer-support-agent.agentbase.io</span></div>
         </div>
-        <p style="font-size: 1.125rem; margin-top: 2rem;">
-            It's that simple. Write your agent code, deploy it with a single command, and AgentBase handles the rest.
-        </p>
     </section>
 
-    <section class="section dark">
-        <h2>The Future is Autonomous</h2>
-        <p style="font-size: 1.5rem; font-weight: 300; max-width: 900px; margin: 2rem auto; line-height: 1.8;">
+    <section class="section">
+        <h2>Built for Production</h2>
+        <div class="stats">
+            <div class="stat">
+                <h3>99.99%</h3>
+                <p>Uptime SLA</p>
+            </div>
+            <div class="stat">
+                <h3>&lt;50ms</h3>
+                <p>P99 Latency</p>
+            </div>
+            <div class="stat">
+                <h3>50+</h3>
+                <p>Global Regions</p>
+            </div>
+            <div class="stat">
+                <h3>∞</h3>
+                <p>Auto-Scaling</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="text-align: center;">
+        <h2 style="margin-bottom: 2rem;">The Future is Autonomous</h2>
+        <p style="font-size: 1.5rem; font-weight: 300; max-width: 900px; margin: 0 auto 3rem; line-height: 1.7; color: var(--text-light);">
             AI agents are the next evolution of software. They don't just respond to requests—they take initiative, 
             learn from experience, and collaborate with other agents to solve complex problems.
         </p>
-        <p style="font-size: 1.5rem; font-weight: 300; max-width: 900px; margin: 2rem auto; line-height: 1.8;">
+        <p style="font-size: 1.75rem; font-weight: 600; margin-bottom: 3rem;">
             AgentBase is the platform that makes this future possible.
         </p>
+        <a href="#features" class="cta">Start Building →</a>
     </section>
 
     <footer>
